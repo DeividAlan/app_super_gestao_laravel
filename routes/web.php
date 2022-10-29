@@ -24,12 +24,24 @@ Route::get('/login', function(){ return 'Login'; })->name('site.login');
 
 Route::prefix('/app')->group(function(){
     Route::get(
-        '/clientes', function(){ return 'Clientes'; }
+        '/clientes',
+        function(){ return 'Clientes'; }
     )->name('app.clientes');
     Route::get(
-        '/fornecedores', function(){ return 'Fornecedores'; }
+        '/fornecedores',
+        function(){ return 'Fornecedores'; }
     )->name('app.fornecedores');
     Route::get(
-        '/produtos', function(){ return 'Produtos'; }
+        '/produtos',
+        function(){ return 'Produtos'; }
     )->name('app.produtos');
 });
+
+
+Route::get('/rota1', function(){
+    return 'Rota1';
+})->name('site.rota1');
+
+Route::get('/rota2', function(){
+    return redirect()->route('site.rota1');
+})->name('site.rota2');
