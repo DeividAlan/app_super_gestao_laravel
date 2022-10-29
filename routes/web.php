@@ -45,3 +45,7 @@ Route::get('/rota1', function(){
 Route::get('/rota2', function(){
     return redirect()->route('site.rota1');
 })->name('site.rota2');
+
+Route::fallback(function(){
+    return 'Rota não encontrada.';
+});
