@@ -17,6 +17,9 @@
     <br>
     @isset($fornecedores[1]['cnpj'])
         Cnpj: {{ $fornecedores[1]['cnpj'] }}
+        @empty($fornecedores[1]['cnpj'])
+            - vazia
+        @endempty
     @endisset
 @endisset
 
