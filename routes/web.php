@@ -29,7 +29,7 @@ Route::prefix('/app')->group(function(){
     )->name('app.clientes');
     Route::get(
         '/fornecedores',
-        function(){ return 'Fornecedores'; }
+        'FornecedorController@index'
     )->name('app.fornecedores');
     Route::get(
         '/produtos',
@@ -38,13 +38,10 @@ Route::prefix('/app')->group(function(){
 });
 
 
-Route::get('/rota1', function(){
-    return 'Rota1';
-})->name('site.rota1');
-
-Route::get('/rota2', function(){
-    return redirect()->route('site.rota1');
-})->name('site.rota2');
+Route::get(
+    '/teste/{p1}/{p2}',
+    'TesteController@teste'
+)->name('site.teste');
 
 Route::fallback(function(){
     return 'Rota não encontrada.';
