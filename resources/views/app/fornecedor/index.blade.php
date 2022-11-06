@@ -12,7 +12,7 @@
 
 @isset($fornecedores)
 
-    @foreach($fornecedores as $index => $fornecedor)
+    @forelse($fornecedores as $index => $fornecedor)
         Fornecedor: {{ $fornecedor['nome'] }}
         @php $fornecedores[$index]['nome'] = 'Novo nome' @endphp
         <br>
@@ -22,7 +22,9 @@
         <br>
         Telefone: ({{ $fornecedor['ddd'] ?? '- vazio' }}) {{ $fornecedor['telefone'] ?? '- vazio' }}
         <hr>
-    @endforeach
+    @empty
+        Não existe fornecedores.
+    @endforelse
 @endisset
 
 <br>
