@@ -12,22 +12,20 @@
 
 @isset($fornecedores)
 
-    @php $i = 0 @endphp
-    @while(isset($fornecedores[$i]))
-        Fornecedor: {{ $fornecedores[$i]['nome'] }}
+    @foreach($fornecedores as $index => $fornecedor)
+        Fornecedor: {{ $fornecedor['nome'] }}
+        @php $fornecedores[$index]['nome'] = 'Novo nome' @endphp
         <br>
-        Status: {{ $fornecedores[$i]['status'] }}
+        Status: {{ $fornecedor['status'] }}
         <br>
-        Cnpj: {{ $fornecedores[$i]['cnpj'] ?? '- vazio' }}
+        Cnpj: {{ $fornecedor['cnpj'] ?? '- vazio' }}
         <br>
-        Telefone: ({{ $fornecedores[$i]['ddd'] ?? '- vazio' }}) {{ $fornecedores[1]['telefone'] ?? '- vazio' }}
+        Telefone: ({{ $fornecedor['ddd'] ?? '- vazio' }}) {{ $fornecedor['telefone'] ?? '- vazio' }}
         <hr>
-        @php $i++ @endphp
-    @endwhile
+    @endforeach
 @endisset
 
 <br>
-
 
 
 
