@@ -21,6 +21,10 @@
         Cnpj: {{ $fornecedor['cnpj'] ?? '- vazio' }}
         <br>
         Telefone: ({{ $fornecedor['ddd'] ?? '- vazio' }}) {{ $fornecedor['telefone'] ?? '- vazio' }}
+        <br>
+        @if ($loop->first)
+            Primeira interação.
+        @endif
         <hr>
     @empty
         Não existe fornecedores.
