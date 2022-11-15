@@ -43,16 +43,15 @@ class ContatoController extends Controller
         // $contato = new SiteContato();
         // $contato->create($request->all());
 
-        //SiteContato()::create($request->all());
 
         $request->validate([
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
+            'email' => 'email',
+            'motivo_contato_id' => 'required',
             'mensagem' => 'required|max:2000'
         ]);
-
-        return view('site.contato');
+        SiteContato::create($request->all());
+        return redirect()->route('site.index');
     }
 }
