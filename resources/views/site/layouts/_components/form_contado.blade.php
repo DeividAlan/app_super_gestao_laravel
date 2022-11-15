@@ -2,11 +2,18 @@
 <form action={{ route('site.contato') }} method="post">
     @csrf
     <input name="nome" value="{{ old('nome') }}" type="text" placeholder="Nome" class="{{ $classe }}">
-    <br>
+    @if ($errors->has('nome'))
+        <p style="margin: 0; white-space: nowrap; text-align: left">
+            {{ $errors->first('nome') }}
+        </p>
+    @else
+        <br>
+    @endif
     <input name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone" class="{{ $classe }}">
+    {{ $errors->has('telefone') ? $errors->first('telefone') : ''}}
     <br>
     <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="{{ $classe }}">
-    <br>
+    {{ $errors->has('email') ? $errors->first('email') : ''}}
     <select name="motivo_contato_id" class="{{ $classe }}">
         <option value="">Qual o motivo do contato?</option>
         @foreach($motivo_contatos as $key => $motivo_contato )
@@ -18,16 +25,21 @@
             </option>
         @endforeach
     </select>
+    {{ $errors->has('motivo_contato_id') ? $errors->first('motivo_contato_id') : ''}}
     <br>
     <textarea name="mensagem" class="{{ $classe }}">{{
         (old('mensagem') != '')
         ? old('mensagem')
         : 'Preencha aqui a sua mensagem'
     }}</textarea>
+    {{ $errors->has('mensagem') ? $errors->first('mensagem') : ''}}
     <br>
     <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
 
-<div style={position: absolute}>
-    {{$errors}}
-</div>
+@if ($errors->any())
+    <div style="position: absolute">
+        {{$errors}}
+    </div>
+@endif
+
