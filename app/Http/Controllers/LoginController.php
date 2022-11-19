@@ -10,7 +10,13 @@ class LoginController extends Controller
     public function index(Request $request) {
         $erro = $request->get('erro');
 
-        return view('site.login', ['titulo' => 'Login', 'erro' => $erro]);
+        if($erro == 1) {
+            $msgErro = 'O usuario ou senha esta errado';
+        } else if ($erro == 2) {
+            $msgErro = 'Pagina acessada apenas com altenticação, favro realizar login';
+        }
+
+        return view('site.login', ['titulo' => 'Login', 'erro' => $msgErro]);
     }
 
 
@@ -35,7 +41,11 @@ class LoginController extends Controller
         if (empty($usuario)){
             return redirect()->route('site.login', ['erro' => 1]);
         } else {
-            return 'acessou';
+            session_start();
+            $_SESSION['nome'] = $usuario->name;
+            $_SESSION['email'] = $usuario->email;
+
+            return redirect()->route('app.clientes');
         }
     }
 }

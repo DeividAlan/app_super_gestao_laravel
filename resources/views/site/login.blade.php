@@ -12,7 +12,7 @@
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
                 <form action="{{ route('site.login') }}" method="post">
                     @csrf
-                    {{ empty($erro) ? '' : 'O Usuario ou senha esta errado' }}
+                    {{ empty($erro) ? '' : $erro }}
                     <input name="usuario" value="{{ old('usuario') }}" type="text" placeholder="Usuario" class="borda-preta">
                     {{ $errors->has('usuario') ? $errors->first('usuario') : ''}}
                     <input name="senha" type="password" placeholder="Senha" class="borda-preta">
