@@ -14,6 +14,8 @@ class LoginController extends Controller
             $msgErro = 'O usuario ou senha esta errado';
         } else if ($erro == 2) {
             $msgErro = 'Pagina acessada apenas com altenticação, favro realizar login';
+        } else {
+            $msgErro = '';
         }
 
         return view('site.login', ['titulo' => 'Login', 'erro' => $msgErro]);
@@ -45,7 +47,12 @@ class LoginController extends Controller
             $_SESSION['nome'] = $usuario->name;
             $_SESSION['email'] = $usuario->email;
 
-            return redirect()->route('app.clientes');
+            return redirect()->route('app.home');
         }
+    }
+
+    public function sair() {
+        session_destroy();
+        return redirect()->route('site.index');
     }
 }
