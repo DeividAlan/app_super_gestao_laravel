@@ -16,8 +16,34 @@
         </div>
 
         <div class="informacao-pagina">
-            <div style="width: 30%; margin-left: auto; margin-right: auto;">
-                ... Lista ...
+            <div style="width: 90%; margin-left: auto; margin-right: auto; margin-top: 50px">
+                <table border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Site</th>
+                            <th>UF</th>
+                            <th>Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($fornecedores as $fornecedor)
+                            <tr>
+                                <th>{{$fornecedor->nome}}</th>
+                                <th>{{$fornecedor->site}}</th>
+                                <th>{{$fornecedor->uf}}</th>
+                                <th>{{$fornecedor->email}}</th>
+                                <th><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}">Excluir</a></th>
+                                <th><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $fornecedores->appends($request)->links() }}
+                <br>
+                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }} (de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
             </div>
         </div>
     </div>
