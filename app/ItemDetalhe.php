@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProdutoDetalhe extends Model
+class ItemDetalhe extends Model
 {
+    protected $table = 'produto_detalhes';
+
     protected $fillable = [
         'produto_id',
         'comprimento',
@@ -15,6 +17,6 @@ class ProdutoDetalhe extends Model
     ];
 
     public function produto() {
-        return $this->belongsTo('App\Produto');
+        return $this->belongsTo('App\Item', 'produto_id', 'id');
     }
 }

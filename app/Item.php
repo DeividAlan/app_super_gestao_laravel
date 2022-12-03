@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Produto extends Model
+class Item extends Model
 {
+    protected $table = 'produtos';
+
     protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
 
     public function produtoDetalhe() {
-        return $this->hasOne('App\ProdutoDetalhe');
+        return $this->hasOne('App\ItemDetalhe', 'produto_id', 'id');
     }
 }
