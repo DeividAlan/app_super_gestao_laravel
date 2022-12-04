@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Produto;
 use App\ProdutoDetalhe;
 use App\Unidade;
+use App\Fornecedor;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -46,7 +47,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -58,6 +60,7 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $regras = [
+            'fornecedor_id' => 'exists:fornecedores,id',
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:200',
             'peso' => 'required|integer',
@@ -65,6 +68,7 @@ class ProdutoController extends Controller
         ];
 
         $feedback = [
+            'fornecedor_id.exists' => 'O campo fornecedor não existe',
             'required' => 'O campo :attribute deve ser preenchido',
             'nome.min' => 'O campo Nome deve ter no minimo 3 caracters',
             'nome.max' => 'O campo Nome deve ter no maximo 40 caracters',
@@ -100,7 +104,8 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
         // return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
@@ -114,6 +119,7 @@ class ProdutoController extends Controller
     public function update(Request $request, Produto $produto)
     {
         $regras = [
+            'fornecedor_id' => 'exists:fornecedores,id',
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:200',
             'peso' => 'required|integer',
@@ -121,6 +127,7 @@ class ProdutoController extends Controller
         ];
 
         $feedback = [
+            'fornecedor_id.exists' => 'O campo fornecedor não existe',
             'required' => 'O campo :attribute deve ser preenchido',
             'nome.min' => 'O campo Nome deve ter no minimo 3 caracters',
             'nome.max' => 'O campo Nome deve ter no maximo 40 caracters',

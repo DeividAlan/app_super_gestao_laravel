@@ -31,12 +31,33 @@
                     <tbody>
                         @foreach($fornecedores as $fornecedor)
                             <tr>
-                                <th>{{$fornecedor->nome}}</th>
-                                <th>{{$fornecedor->site}}</th>
-                                <th>{{$fornecedor->uf}}</th>
-                                <th>{{$fornecedor->email}}</th>
-                                <th><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}">Excluir</a></th>
-                                <th><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></th>
+                                <td>{{$fornecedor->nome}}</td>
+                                <td>{{$fornecedor->site}}</td>
+                                <td>{{$fornecedor->uf}}</td>
+                                <td>{{$fornecedor->email}}</td>
+                                <td><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}">Excluir</a></td>
+                                <td><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <p>Lista de Produtos</p>
+                                    <table border="1" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nome</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($fornecedor->produtos as $key => $produto)
+                                                <tr>
+                                                    <td>{{$produto->id}}</td>
+                                                    <td>{{$produto->nome}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
